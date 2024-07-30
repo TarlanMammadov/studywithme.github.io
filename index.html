@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Success Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            overflow-x: hidden;
+        }
+        .container {
+            display: flex;
+            width: 400vw; /* Adjust based on number of pages */
+            height: 100vh;
+            transition: transform 0.5s ease;
+        }
+        .page {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            overflow: auto;
+        }
+        header, footer {
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+        .section h2 {
+            color: #aeeeee;
+        }
+        .timer {
+            position: relative;
+            background: radial-gradient(circle, #ff6f61, #ff9a9e);
+            padding: 20px;
+            border-radius: 8px;
+            color: #000;
+            text-align: center;
+        }
+        input, textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #ffffff;
+            color: #000000;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #00bcd4;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0097a7;
+        }
+        #timer-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        footer p {
+            margin: 0;
+        }
+        .proverbs {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .proverbs p {
+            margin: 0;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1: Advice & Tips -->
+        <div class="page" id="advice-tips">
+            <header>
+                <h1>Student Success Hub</h1>
+            </header>
+            <h2>Advice & Tips</h2>
+            <p>Welcome to the Student Success Hub! Here you'll find valuable advice and tips to help you excel in your studies and personal growth.</p>
+        </div>
+
+        <!-- Page 2: Success Stories -->
+        <div class="page" id="success-stories">
+            <h2>Success Stories</h2>
+            <p>Explore the inspiring stories of successful people from various fields. Learn from their experiences and apply their lessons to your own journey.</p>
+        </div>
+
+        <!-- Page 3: Pomodoro Timer -->
+        <div class="page" id="pomodoro-timer">
+            <h2>Adjustable Pomodoro Timer</h2>
+            <div class="timer">
+                <p>Set your study session, short break, and long break times:</p>
+                <input type="number" id="study-time" placeholder="Study Minutes" min="1">
+                <input type="number" id="short-break-time" placeholder="Short Break Minutes" min="1">
+                <input type="number" id="long-break-time" placeholder="Long Break Minutes" min="1">
+                <button onclick="startPomodoro()">Start</button>
+                <p id="timer-display">00:00</p>
+            </div>
+        </div>
+
+        <!-- Page 4: Customizable Schedule -->
+        <div class="page" id="schedule">
+            <h2>Customizable Schedule</h2>
+            <p>Plan your week with our customizable schedule template. Fill in your tasks and study sessions to stay organized and productive.</p>
+            <textarea rows="10" placeholder="Enter your weekly schedule here..."></textarea>
+        </div>
+
+        <!-- Page 5: Proverbs & Creator Info -->
+        <div class="page" id="proverbs">
+            <h2>Proverbs & Tips</h2>
+            <div class="proverbs">
+                <p>"One day or day one, you decide" Paulo Coelho</p>
+                <!-- More proverbs will be added here -->
+            </div>
+            <footer>
+                <p>&copy; 2024 Student Success Hub. Created by Tarlan Mammadov, 15 years old.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function startPomodoro() {
+            var studyTime = document.getElementById('study-time').value;
+            var shortBreakTime = document.getElementById('short-break-time').value;
+            var longBreakTime = document.getElementById('long-break-time').value;
+            
+            if (studyTime > 0 && shortBreakTime > 0 && longBreakTime > 0) {
+                var time = studyTime * 60;
+                var timerDisplay = document.getElementById('timer-display');
+                var interval = setInterval(function() {
+                    if (time <= 0) {
+                        alert('Break Time!');
+                        clearInterval(interval);
+                        // Implement break and long break logic here
+                    } else {
+                        var minutes = Math.floor(time / 60);
+                        var seconds = time % 60;
+                        timerDisplay.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                        time--;
+                    }
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
